@@ -3,29 +3,31 @@ img {
   height: 100px;
 }
 
-body {
+body{
   padding: 0;
   margin: 0;
 }
 
-header {
+header
+{
   display: flex;
   flex-direction: row;
   width: 100%;
   background-color: gray;
-}
-header i {
-  margin-top: 28px;
+  i{
+      margin-top: 28px;
+  }
 }
 
-#liste {
+#liste
+{
   width: 100%;
   background-color: darkred;
 }
 
-footer {
+
+footer
+{
   width: 100%;
   background-color: gray;
 }
-
-/*# sourceMappingURL=style.css.map */
