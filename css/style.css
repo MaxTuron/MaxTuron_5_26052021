@@ -3,6 +3,11 @@ body {
   margin: 0;
 }
 
+section img {
+  width: 50px;
+  height: 50px;
+}
+
 header {
   display: flex;
   flex-direction: row;
@@ -16,18 +21,18 @@ header i {
   right: 50px;
 }
 
-#liste {
+.liste {
   display: flex;
   flex-direction: row;
 }
-#liste .cards {
+.liste .cards {
   display: flex;
   justify-content: center;
   width: 33%;
   border-radius: 2px;
   margin-right: 8px;
 }
-#liste .cards img {
+.liste .cards img {
   margin-top: 8px;
   height: 185px;
 }
