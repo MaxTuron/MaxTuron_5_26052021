@@ -3,7 +3,7 @@ const section = document.querySelector('section'); //Défini la ou le code html 
 fetch("http://localhost:3000/api/teddies/") //Lien vers l'API
     .then(res => res.json()) //Défini le type de fichier attendu, ici un json
     .then(data => {
-        for (let i=0; i<Array(5).length; i++) { // Boucle parcourant les  entrées du tableau
+        for (let i=0; i<data.length; i++) { // Boucle parcourant les  entrées du tableau
 
             const div = document.createElement('div'); //Création d'une div
             div.className='cards'; //Ajout de la classe "cards"
@@ -15,7 +15,7 @@ fetch("http://localhost:3000/api/teddies/") //Lien vers l'API
 
             const lien = document.createElement('a'); //Création d'un lien
             div.appendChild(lien); //Défini l'élément parent "div"
-            lien.src = data[i]._id; //Récupération de l'ID depuis le json
+            lien.href = 'pages/product.html?id='+data[i]._id; //Récupération de l'ID depuis le json
 
             const name = document.createElement('h1'); //Création d'un titre h1
             lien.appendChild(name); //Défini l'élément parent "lien"
