@@ -37,7 +37,7 @@ fetch("http://localhost:3000/api/teddies/"+searchParamsId) //Lien vers l'API
 
                     const colorTeddys = document.createElement('input'); //Création d'un paragraphe
                     colorTeddys.type='checkbox';
-                    colorTeddys.id='colorTeddys';
+                    colorTeddys.id='colorTeddys'+[i];
                     div.appendChild(colorTeddys); //Défini l'élément parent "div"
                     const labelColor = document.createElement('label');
                     labelColor.for='colorTeddys';
@@ -49,23 +49,27 @@ fetch("http://localhost:3000/api/teddies/"+searchParamsId) //Lien vers l'API
         console.log(data) //Affichage dans la console du navigateur
 
         //créer un bouton qui, au clic, va lancer la fonction suivante :
-            const AjoutPanier = document.createElement('button');
+            const ajoutPanier = document.createElement('button');
             const txtButton = document.createTextNode("Ajouter au panier");
-            AjoutPanier.appendChild(txtButton);
-            div.appendChild(AjoutPanier);
+            ajoutPanier.appendChild(txtButton);
+            div.appendChild(ajoutPanier);
 
-            console.log(panier);
-
-                if (panier === null) {
-                        const array = [];
-                        array.push(data.name);
-                        array.push(data.price);
-                        array.push(data.imageUrl);
-                        array.push(data.colors);
-                        localStorage.setItem('panier', JSON.stringify(array));
-        } //else {
-            //console.log(JSON.stringify(JSON.parse(panier).push(data.name)));
-            //localStorage.setItem('panier', JSON.stringify(JSON.parse(panier).push(data.name)));
-        //}
+                const panier = localStorage;
+                if (panier.length === 0) {
+                    const array = [];
+                    array.push(data.name);
+                    array.push(data.price);
+                    array.push(data.imageUrl);
+                    array.push(data.colors);
+                    localStorage.setItem('article1', JSON.stringify(array));
+                } else {
+                    let i=panier.length+1
+                    const array = [];
+                    array.push(data.name);
+                    array.push(data.price);
+                    array.push(data.imageUrl);
+                    array.push(data.colors);
+                    localStorage.setItem('article'+i, JSON.stringify(array));
+        }
     });
 
