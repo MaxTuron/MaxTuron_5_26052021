@@ -34,42 +34,41 @@ fetch("http://localhost:3000/api/teddies/"+searchParamsId) //Lien vers l'API
             description.innerText = data.description; //Récupération de la description depuis le json
 
             for (let i=0; i<data.colors.length; i++) {
-
-                    const colorTeddys = document.createElement('input'); //Création d'un paragraphe
-                    colorTeddys.type='checkbox';
-                    colorTeddys.id='colorTeddys'+[i];
-                    div.appendChild(colorTeddys); //Défini l'élément parent "div"
-                    const labelColor = document.createElement('label');
-                    labelColor.for='colorTeddys';
-                    div.appendChild(labelColor);
-                    const txtColor = document.createTextNode(data.colors[i]);
-                    labelColor.appendChild(txtColor);
+                const colorTeddys = document.createElement('input'); //Création d'un paragraphe
+                colorTeddys.type='checkbox';
+                colorTeddys.id='colorTeddys'+[i];
+                div.appendChild(colorTeddys); //Défini l'élément parent "div"
+                const labelColor = document.createElement('label');
+                labelColor.for='colorTeddys';
+                div.appendChild(labelColor);
+                const txtColor = document.createTextNode(data.colors[i]);
+                labelColor.appendChild(txtColor);
             }
 
-        console.log(data) //Affichage dans la console du navigateur
-
-        //créer un bouton qui, au clic, va lancer la fonction suivante :
+            //créer un bouton qui, au clic, va lancer la fonction suivante :
             const ajoutPanier = document.createElement('button');
             const txtButton = document.createTextNode("Ajouter au panier");
             ajoutPanier.appendChild(txtButton);
             div.appendChild(ajoutPanier);
-
-                const panier = localStorage;
-                if (panier.length === 0) {
-                    const array = [];
-                    array.push(data.name);
-                    array.push(data.price);
-                    array.push(data.imageUrl);
-                    array.push(data.colors);
-                    localStorage.setItem('article1', JSON.stringify(array));
-                } else {
-                    let i=panier.length+1
-                    const array = [];
-                    array.push(data.name);
-                    array.push(data.price);
-                    array.push(data.imageUrl);
-                    array.push(data.colors);
-                    localStorage.setItem('article'+i, JSON.stringify(array));
-        }
+            ajoutPanier.onclick = function() {
+                myFunction(data);
+            };            
     });
 
+    function myFunction(data) {
+        //Ajout au panier
+        const teddy = {
+            name: data.name,
+            id: data._id,
+            color: 'not implemented',
+            number: 1,
+        };
+        const panier = localStorage.getItem('panier');
+        if (!panier) {
+            localStorage.setItem('panier', JSON.stringify([teddy]));
+        } else {     
+            arrayPanier = JSON.parse(localStorage.getItem('panier'));      
+            arrayPanier.push(teddy);
+            localStorage.setItem('panier', JSON.stringify(arrayPanier));
+        }
+    }
