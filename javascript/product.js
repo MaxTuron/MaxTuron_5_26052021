@@ -56,14 +56,21 @@ fetch("http://localhost:3000/api/teddies/"+searchParamsId) //Lien vers l'API
             };            
     });
 
+
     function addLocalstorage(data) {
         //Ajout au panier
+
+        let choosenColor;
+        choosenColor = document.getElementById("colorTeddys").options[document.getElementById('colorTeddys').selectedIndex].text;
+
         const teddy = {
             name: data.name,
             id: data._id,
-            color: 'not implemented',
+            color: choosenColor,
             number: 1,
+
         };
+
         const panier = localStorage.getItem('panier');
         if (!panier) {
             localStorage.setItem('panier', JSON.stringify([teddy]));

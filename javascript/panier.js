@@ -17,6 +17,10 @@ if (!objJson) {
         div.appendChild(name);
         name.innerText = objJson[i].name;
 
+        const color = document.createElement('p');
+        div.appendChild(color);
+        color.innerText = objJson[i].color;
+
         const number = document.createElement('p');
         div.appendChild(number);
         number.innerText = objJson[i].number;
