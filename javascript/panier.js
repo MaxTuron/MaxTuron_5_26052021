@@ -12,8 +12,13 @@ if (!objJson) {
     name.innerText = "Panier vide";
 } else {
     for (let i=0; i<objJson.length; i++) {
+
         const name = document.createElement('p');
         div.appendChild(name);
         name.innerText = objJson[i].name;
+
+        const number = document.createElement('p');
+        div.appendChild(number);
+        number.innerText = objJson[i].number;
     }
 }

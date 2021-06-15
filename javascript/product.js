@@ -33,16 +33,17 @@ fetch("http://localhost:3000/api/teddies/"+searchParamsId) //Lien vers l'API
             div.appendChild(description); //Défini l'élément parent "div"
             description.innerText = data.description; //Récupération de la description depuis le json
 
+        const colorTeddys = document.createElement('select'); //Création d'un paragraphe
+        colorTeddys.name='colors';
+        colorTeddys.id='colorTeddys';
+        div.appendChild(colorTeddys); //Défini l'élément parent "div"
+
             for (let i=0; i<data.colors.length; i++) {
-                const colorTeddys = document.createElement('input'); //Création d'un paragraphe
-                colorTeddys.type='checkbox';
-                colorTeddys.id='colorTeddys'+[i];
-                div.appendChild(colorTeddys); //Défini l'élément parent "div"
-                const labelColor = document.createElement('label');
-                labelColor.for='colorTeddys';
-                div.appendChild(labelColor);
+                const color = document.createElement('option');
+                color.value='colors'+[i];
+                colorTeddys.appendChild(color);
                 const txtColor = document.createTextNode(data.colors[i]);
-                labelColor.appendChild(txtColor);
+                color.appendChild(txtColor);
             }
 
             //créer un bouton qui, au clic, va lancer la fonction suivante :
@@ -51,11 +52,11 @@ fetch("http://localhost:3000/api/teddies/"+searchParamsId) //Lien vers l'API
             ajoutPanier.appendChild(txtButton);
             div.appendChild(ajoutPanier);
             ajoutPanier.onclick = function() {
-                myFunction(data);
+                addLocalstorage(data);
             };            
     });
 
-    function myFunction(data) {
+    function addLocalstorage(data) {
         //Ajout au panier
         const teddy = {
             name: data.name,
