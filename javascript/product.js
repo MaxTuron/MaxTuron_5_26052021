@@ -78,6 +78,7 @@ fetch("http://localhost:3000/api/teddies/"+searchParamsId) //Lien vers l'API
         const teddy = {
             name: data.name,
             id: data._id,
+            price: data.price,
             color: choosenColor,
             number: choosenNumber,
         };
