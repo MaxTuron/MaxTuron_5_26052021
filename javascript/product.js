@@ -13,30 +13,39 @@ fetch("http://localhost:3000/api/teddies/"+searchParamsId) //Lien vers l'API
     .then(res => res.json()) //Défini le type de fichier attendu, ici un json
     .then(data => {
 
-            const div = document.createElement('div'); //Création d'une div
-            div.className='cards'; //Ajout de la classe "cards"
-            section.appendChild(div); //Défini l'élément parent "section"
+        const div = document.createElement('div'); //Création d'une div
+        div.className='cards'; //Ajout de la classe "cards"
+        section.appendChild(div); //Défini l'élément parent "section"
 
-            const img = document.createElement('img'); //Création d'une image
-            div.appendChild(img); //Défini l'élément parent "section"
-            img.src = data.imageUrl; //Récupération du lien d'une image depuis le fichier json
+        const img = document.createElement('img'); //Création d'une image
+        div.appendChild(img); //Défini l'élément parent "section"
+        img.src = data.imageUrl; //Récupération du lien d'une image depuis le fichier json
 
-            const name = document.createElement('h1'); //Création d'un titre h1
-            div.appendChild(name); //Défini l'élément parent "lien"
-            name.innerText = data.name; //Récupération du nom depuis le json
+        const name = document.createElement('h1'); //Création d'un titre h1
+        div.appendChild(name); //Défini l'élément parent "lien"
+        name.innerText = data.name; //Récupération du nom depuis le json
 
-            const price = document.createElement('p'); //Création d'un paragraphe
-            div.appendChild(price); //Défini l'élément parent "div"
-            price.innerText = data.price; //Récupération du prix depuis le json
+        const price = document.createElement('p'); //Création d'un paragraphe
+        div.appendChild(price); //Défini l'élément parent "div"
+        price.innerText = data.price; //Récupération du prix depuis le json
 
-            const description = document.createElement('p'); //Création d'un paragraphe
-            div.appendChild(description); //Défini l'élément parent "div"
-            description.innerText = data.description; //Récupération de la description depuis le json
+        const description = document.createElement('p'); //Création d'un paragraphe
+        div.appendChild(description); //Défini l'élément parent "div"
+        description.innerText = data.description; //Récupération de la description depuis le json
 
         const colorTeddys = document.createElement('select'); //Création d'un paragraphe
         colorTeddys.name='colors';
         colorTeddys.id='colorTeddys';
         div.appendChild(colorTeddys); //Défini l'élément parent "div"
+
+        const number = document.createElement('input');
+        number.type='number';
+        number.id="quantite";
+        number.min=0;
+        number.max=10;
+        div.appendChild(number);
+        const txtQuantité = document.createTextNode("Quantité");
+        number.appendChild(txtQuantité);
 
             for (let i=0; i<data.colors.length; i++) {
                 const color = document.createElement('option');
@@ -63,12 +72,14 @@ fetch("http://localhost:3000/api/teddies/"+searchParamsId) //Lien vers l'API
         let choosenColor;
         choosenColor = document.getElementById("colorTeddys").options[document.getElementById('colorTeddys').selectedIndex].text;
 
+        let choosenNumber;
+        choosenNumber = document.getElementById('quantite').value;
+
         const teddy = {
             name: data.name,
             id: data._id,
             color: choosenColor,
-            number: 1,
-
+            number: choosenNumber,
         };
 
         const panier = localStorage.getItem('panier');
