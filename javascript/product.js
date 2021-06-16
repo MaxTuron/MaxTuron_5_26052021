@@ -38,14 +38,14 @@ fetch("http://localhost:3000/api/teddies/"+searchParamsId) //Lien vers l'API
         colorTeddys.id='colorTeddys';
         div.appendChild(colorTeddys); //Défini l'élément parent "div"
 
+
         const number = document.createElement('input');
         number.type='number';
         number.id="quantite";
         number.min=0;
         number.max=10;
+        number.placeholder="Quantité";
         div.appendChild(number);
-        const txtQuantité = document.createTextNode("Quantité");
-        number.appendChild(txtQuantité);
 
             for (let i=0; i<data.colors.length; i++) {
                 const color = document.createElement('option');
