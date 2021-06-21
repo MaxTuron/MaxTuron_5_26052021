@@ -1,34 +1,46 @@
-const section = document.querySelector('section'); //Défini la ou le code html sera crée
+//Défini la ou le code html sera crée
+const section = document.querySelector('section');
 
-fetch("http://localhost:3000/api/teddies/") //Lien vers l'API
-    .then(res => res.json()) //Défini le type de fichier attendu, ici un json
+//Lien vers l'API
+fetch("http://localhost:3000/api/teddies/")
+    //Défini le type de fichier attendu, ici un json
+    .then(res => res.json())
     .then(data => {
-        for (let i=0; i<data.length; i++) { // Boucle parcourant les  entrées du tableau
+        //Boucle parcourant les  entrées du tableau
+        for (let i=0; i<data.length; i++) {
 
-            const div = document.createElement('div'); //Création d'une div
-            div.className='cards'; //Ajout de la classe "cards"
-            section.appendChild(div); //Défini l'élément parent "section"
+            //Création d'une div
+            const div = document.createElement('div');
+            div.className='cards';
+            section.appendChild(div);
 
-            const img = document.createElement('img'); //Création d'une image
-            div.appendChild(img); //Défini l'élément parent "section"
-            img.src = data[i].imageUrl; //Récupération du lien d'une image depuis le fichier json
+            //Création d'une image
+            const img = document.createElement('img');
+            div.appendChild(img);
+            img.src = data[i].imageUrl;
 
-            const lien = document.createElement('a'); //Création d'un lien
-            div.appendChild(lien); //Défini l'élément parent "div"
-            lien.href = 'pages/product.html?id='+data[i]._id; //Récupération de l'ID depuis le json
+            //Création d'un lien
+            const lien = document.createElement('a');
+            div.appendChild(lien);
+            //Récupération de l'ID depuis le json
+            lien.href = 'pages/product.html?id='+data[i]._id;
 
-            const name = document.createElement('h1'); //Création d'un titre h1
-            lien.appendChild(name); //Défini l'élément parent "lien"
-            name.innerText = data[i].name; //Récupération du nom depuis le json
+            //Création d'un titre h1
+            const name = document.createElement('h1');
+            lien.appendChild(name);
+            name.innerText = data[i].name;
 
-            const price = document.createElement('p'); //Création d'un paragraphe
-            div.appendChild(price); //Défini l'élément parent "div"
-            price.innerText = data[i].price; //Récupération du prix depuis le json
+            //Création d'un paragraphe
+            const price = document.createElement('p');
+            div.appendChild(price);
+            price.innerText = data[i].price;
 
-            const description = document.createElement('p'); //Création d'un paragraphe
-            div.appendChild(description); //Défini l'élément parent "div"
-            description.innerText = data[i].description; //Récupération de la description depuis le json
+            //Création d'un paragraphe
+            const description = document.createElement('p');
+            div.appendChild(description);
+            description.innerText = data[i].description;
         }
-        console.log(data) //Affichage dans la console du navigateur
+        //Affichage dans la console du navigateur
+        console.log(data)
     });
 

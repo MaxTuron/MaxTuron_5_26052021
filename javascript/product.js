@@ -13,68 +13,86 @@ fetch("http://localhost:3000/api/teddies/"+searchParamsId) //Lien vers l'API
     .then(res => res.json()) //Défini le type de fichier attendu, ici un json
     .then(data => {
 
-        const div = document.createElement('div'); //Création d'une div
-        div.className='cards'; //Ajout de la classe "cards"
-        section.appendChild(div); //Défini l'élément parent "section"
+        //Création de la div
+        const div = document.createElement('div');
+        //Ajout de la classe "cards"
+        div.className='cards';
+        //Défini l'élément parent "section"
+        section.appendChild(div);
 
-        const img = document.createElement('img'); //Création d'une image
-        div.appendChild(img); //Défini l'élément parent "section"
-        img.src = data.imageUrl; //Récupération du lien d'une image depuis le fichier json
+        //Création d'une image
+        const img = document.createElement('img');
+        div.appendChild(img);
+        //Récupération du lien d'une image depuis le fichier json
+        img.src = data.imageUrl;
 
-        const name = document.createElement('h1'); //Création d'un titre h1
-        div.appendChild(name); //Défini l'élément parent "lien"
-        name.innerText = data.name; //Récupération du nom depuis le json
+        //Création d'un titre h1
+        const name = document.createElement('h1');
+        div.appendChild(name);
+        name.innerText = data.name;
 
-        const price = document.createElement('p'); //Création d'un paragraphe
-        div.appendChild(price); //Défini l'élément parent "div"
-        price.innerText = data.price; //Récupération du prix depuis le json
+        //Création d'un paragraphe prix
+        const price = document.createElement('p');
+        div.appendChild(price);
+        price.innerText = data.price;
 
-        const description = document.createElement('p'); //Création d'un paragraphe
-        div.appendChild(description); //Défini l'élément parent "div"
-        description.innerText = data.description; //Récupération de la description depuis le json
+        //Création d'un paragraphe description
+        const description = document.createElement('p');
+        div.appendChild(description);
+        description.innerText = data.description;
 
-        const colorTeddys = document.createElement('select'); //Création d'un paragraphe
+        //Création d'un selecteur pour les différentes couleurs
+        const colorTeddys = document.createElement('select');
         colorTeddys.name='colors';
         colorTeddys.id='colorTeddys';
-        div.appendChild(colorTeddys); //Défini l'élément parent "div"
+        div.appendChild(colorTeddys);
 
-
+        //Création d'un input permettant à l'utilistaeur de choisir le nombre de produit
         const number = document.createElement('input');
         number.type='number';
         number.id="quantite";
+        //Valeur minimale
         number.min=0;
+        //Valeur maximale
         number.max=10;
-        number.placeholder="Quantité";
+        //Valeur de base
+        number.value=1;
         div.appendChild(number);
 
-            for (let i=0; i<data.colors.length; i++) {
-                const color = document.createElement('option');
-                color.value='colors'+[i];
-                colorTeddys.appendChild(color);
-                const txtColor = document.createTextNode(data.colors[i]);
-                color.appendChild(txtColor);
-            }
+        //Boucle permettant d'afficher le nom des couleurs liée à un ours
+        for (let i=0; i<data.colors.length; i++) {
+            //Création de la balise option
+            const color = document.createElement('option');
+            color.value='colors'+[i];
+            colorTeddys.appendChild(color);
+            const txtColor = document.createTextNode(data.colors[i]);
+            color.appendChild(txtColor);
+        }
 
-            //créer un bouton qui, au clic, va lancer la fonction suivante :
+            //Création du bouton
             const ajoutPanier = document.createElement('button');
+            //Texte liée au bouton
             const txtButton = document.createTextNode("Ajouter au panier");
             ajoutPanier.appendChild(txtButton);
             div.appendChild(ajoutPanier);
+            //Appel de la fonction addLocalstorage au click sur le bouton
             ajoutPanier.onclick = function() {
                 addLocalstorage(data);
             };            
     });
 
-
+    //Fonction d'ajout au local storage
     function addLocalstorage(data) {
-        //Ajout au panier
 
+        //Récupération de la couleur choisie par l'utilisateur
         let choosenColor;
         choosenColor = document.getElementById("colorTeddys").options[document.getElementById('colorTeddys').selectedIndex].text;
 
+        //Récupération du nombre choisi par l'utilisateur
         let choosenNumber;
         choosenNumber = document.getElementById('quantite').value;
 
+        //Création de l'objet avec les paramètres de l'ours
         const teddy = {
             name: data.name,
             id: data._id,
@@ -83,11 +101,14 @@ fetch("http://localhost:3000/api/teddies/"+searchParamsId) //Lien vers l'API
             number: choosenNumber,
         };
 
+        //Récupération du localstorage
         const panier = localStorage.getItem('panier');
+        //Si le localstorga est vide alors ajouter l'objet
         if (!panier) {
             localStorage.setItem('panier', JSON.stringify([teddy]));
-        } else {     
-            arrayPanier = JSON.parse(localStorage.getItem('panier'));      
+            //Sinon ajout un objet apres le precédent
+        }else{
+            arrayPanier = JSON.parse(localStorage.getItem('panier'));
             arrayPanier.push(teddy);
             localStorage.setItem('panier', JSON.stringify(arrayPanier));
         }
