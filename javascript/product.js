@@ -106,10 +106,20 @@ fetch("http://localhost:3000/api/teddies/"+searchParamsId) //Lien vers l'API
         //Si le localstorga est vide alors ajouter l'objet
         if (!panier) {
             localStorage.setItem('panier', JSON.stringify([teddy]));
-            //Sinon ajout un objet apres le precédent
+            localStorage.setItem('panier', JSON.stringify([teddy]));
+            //Sinon si un objet est identique mais avec un nombre différent
         }else{
-            arrayPanier = JSON.parse(localStorage.getItem('panier'));
-            arrayPanier.push(teddy);
+            arrayPanier = JSON.parse(panier);
+            let valid = false;
+            arrayPanier.forEach((article)=>{
+                if(article.name===teddy.name && article.color===teddy.color){
+                    article.number = +article.number + +teddy.number;
+                    valid = true;
+                }
+            });
+            if(valid===false){
+                arrayPanier.push(teddy);
+            }
             localStorage.setItem('panier', JSON.stringify(arrayPanier));
         }
     }

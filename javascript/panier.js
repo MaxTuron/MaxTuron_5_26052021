@@ -51,18 +51,8 @@ if (!objPanier) {
         div.appendChild(articleAdd);
 
         articleAdd.onclick = function () {
-            //Parcours les objets du tableau objPanier
-            objPanier.forEach((article) => {
-                //Si le nom et la couleur de l'article corespond à l'objet créer alors
-                if (article.name === objPanier[i].name && article.colors === objPanier[i].colors) {
-                    //On ajoute +1 au nombre d'objet
-                    article.number++;
-                    //Actualistation de la page
-                    history.go(0);
-                }
-            });
-            //Renvoie de l'article modifié dans le localstorage
-            localStorage.setItem('panier', JSON.stringify(objPanier));
+            let objActu = objPanier[i];
+            articlePlus(objActu);
         };
 
 
@@ -71,18 +61,10 @@ if (!objPanier) {
         const txtBtnRemove = document.createTextNode("-");
         articleRemove.appendChild(txtBtnRemove);
         div.appendChild(articleRemove);
+
         articleRemove.onclick = function () {
-            objPanier.forEach((article) => {
-                //Si le nom et la couleur de l'article corespond à l'objet créer alors
-                if (article.name === objPanier[i].name && article.colors === objPanier[i].colors) {
-                    //On retire -1 au nombre d'objet
-                    article.number--;
-                    //Actualistation de la page
-                    history.go(0);
-                }
-            });
-            //Renvoie de l'article modifié dans le localstorage
-            localStorage.setItem('panier', JSON.stringify(objPanier));
+           let objActu = objPanier[i];
+            articleMoins(objActu);
         };
 
 
@@ -92,17 +74,8 @@ if (!objPanier) {
         supprPanier.appendChild(txtBtnSuppr);
         div.appendChild(supprPanier);
         supprPanier.onclick = function () {
-            objPanier.forEach((article) => {
-                    let arraySuppr = JSON.parse(localStorage.getItem('panier'));
-                    if (article.name === arraySuppr[i].name && article.colors === arraySuppr[i].colors) {
-                       arraySuppr.splice(0,1);
-                        objPanier = arraySuppr;
-                       history.go(0);
-                    }
-
-                });
-            //Renvoie de l'article modifié dans le localstorage
-            localStorage.setItem('panier', JSON.stringify(objPanier));
+            let objActu = objPanier[i];
+            articleSuppr(objActu);
         };
 
         //Calcul du prix d'un article (prix unitaire * nombre d'objet)
@@ -117,70 +90,12 @@ if (!objPanier) {
 
     }
 
-    //Création d'une div
-    const divCommande = document.createElement('div');
-    divCommande.className='cards';
-    section.appendChild(divCommande);
-
-    //Création d'un formulaire
-    const formCommande = document.createElement('form');
-    formCommande.method='POST';
-    divCommande.appendChild(formCommande);
-
-    //Création d'un input avec un label pour le nom
-    const txtFirstName = document.createElement('label');
-    txtFirstName.for='firstName';
-    txtFirstName.textContent='Prenom :';
-    formCommande.appendChild(txtFirstName);
-    const firstName = document.createElement('input');
-    firstName.type='text';
-    firstName.id='firstName';
-    txtFirstName.appendChild(firstName);
-
-    //Création d'un input avec un label pour le prenom
-    const txtLastName = document.createElement('label');
-    txtLastName.for='lastName';
-    txtLastName.textContent='Nom :';
-    formCommande.appendChild(txtLastName);
-    const lastName = document.createElement('input');
-    lastName.type='text';
-    lastName.id='lastName';
-    txtLastName.appendChild(lastName);
-
-    //Création d'un input avec un label pour l'adresse
-    const txtAdress = document.createElement('label');
-    txtAdress.for='adress';
-    txtAdress.textContent='Adresse :';
-    formCommande.appendChild(txtAdress);
-    const adress = document.createElement('input');
-    adress.type='text';
-    adress.id='adress';
-    txtAdress.appendChild(adress);
-
-    //Création d'un input avec un label pour la ville
-    const txtCity = document.createElement('label');
-    txtCity.for='city';
-    txtCity.textContent='Ville :';
-    formCommande.appendChild(txtCity);
-    const city = document.createElement('input');
-    city.type='text';
-    city.id='city';
-    txtCity.appendChild(city);
-
-    //Création d'un input avec un label pour l'email'
-    const txtEmail = document.createElement('label');
-    txtEmail.for='email :';
-    txtEmail.textContent='Email';
-    formCommande.appendChild(txtEmail);
-    const email = document.createElement('input');
-    email.type='email';
-    email.id='email';
-    txtEmail.appendChild(email);
+    const form = document.querySelector('form'); //Défini la ou le code html sera crée
 
     //Récupétation du prix total de la commande
     prixTotal = prixAdjust;
     const totalCommande = document.createElement('p');
-    divCommande.appendChild(totalCommande);
+    form.appendChild(totalCommande);
     const afficheTotalCommande = document.createTextNode('Le prix total de la commande est de : '+prixTotal);
     totalCommande.appendChild(afficheTotalCommande);
 
@@ -188,10 +103,49 @@ if (!objPanier) {
     const confirmCommande = document.createElement('button');
     const txtBtnCommande = document.createTextNode("Confirmer la commande");
     confirmCommande.appendChild(txtBtnCommande);
-    divCommande.appendChild(confirmCommande);
+    form.appendChild(confirmCommande);
     confirmCommande.onclick = function () {
 
     };
+}
 
+function articleMoins (objActu){
+    objPanier.forEach((article) => {
+        //Si le nom et la couleur de l'article corespond à l'objet créer alors
+        if (article.name === objActu.name && article.colors === objActu.colors) {
+            //On retire -1 au nombre d'objet
+            article.number--;
+        }
+    });
+    //Renvoie de l'article modifié dans le localstorage
+    localStorage.setItem('panier', JSON.stringify(objPanier));
+    history.go(0);
+}
 
+function articlePlus (objActu){
+    //Parcours les objets du tableau objPanier
+    objPanier.forEach((article) => {
+        //Si le nom et la couleur de l'article corespond à l'objet créer alors
+        if (article.name === objActu.name && article.colors === objActu.colors) {
+            //On ajoute +1 au nombre d'objet
+            article.number++;
+            //Actualistation de la page
+        }
+    });
+    //Renvoie de l'article modifié dans le localstorage
+    localStorage.setItem('panier', JSON.stringify(objPanier));
+    history.go(0);
+}
+
+function articleSuppr (objActu) {
+    let panier = JSON.parse(localStorage.getItem('panier'));
+
+    panier.forEach((article,index)=> {
+        if (objActu.name === article.name && objActu.colors === article.colors) {
+            panier.splice(index,1);
+        }
+    });
+    //Renvoie de l'article modifié dans le localstorage
+    localStorage.setItem('panier', JSON.stringify(panier));
+    history.go(0);
 }
