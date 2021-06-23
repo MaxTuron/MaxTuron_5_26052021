@@ -15,7 +15,7 @@ let prixAdjust = 0;
 let prixArticle = 0;
 
 //Si le panier est vide alors on affiche "Panier vide"
-if (!objPanier) {
+if (objPanier.length===0) {
     const name = document.createElement('p');
     div.appendChild(name);
     name.innerText = "Panier vide";
@@ -62,9 +62,14 @@ if (!objPanier) {
         articleRemove.appendChild(txtBtnRemove);
         div.appendChild(articleRemove);
 
+        if(objPanier[i].number > 0){
         articleRemove.onclick = function () {
-           let objActu = objPanier[i];
+            let objActu = objPanier[i];
             articleMoins(objActu);
+        }
+        }else{
+            let objActu = objPanier[i];
+                articleSuppr(objActu);
         };
 
 
@@ -109,6 +114,7 @@ if (!objPanier) {
     };
 }
 
+//Fonction qui retire 1 au nombre d'objet
 function articleMoins (objActu){
     objPanier.forEach((article) => {
         //Si le nom et la couleur de l'article corespond à l'objet créer alors
@@ -122,6 +128,7 @@ function articleMoins (objActu){
     history.go(0);
 }
 
+//Fonction qui ajout 1 au nombre d'objet
 function articlePlus (objActu){
     //Parcours les objets du tableau objPanier
     objPanier.forEach((article) => {
@@ -137,6 +144,7 @@ function articlePlus (objActu){
     history.go(0);
 }
 
+//Fonction de supression d'article
 function articleSuppr (objActu) {
     let panier = JSON.parse(localStorage.getItem('panier'));
 

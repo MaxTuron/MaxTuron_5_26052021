@@ -14,5 +14,13 @@ fetch("http://localhost:3000/api/teddies/order") //Lien vers l'API
             description.innerText = data[i].description; //Récupération de la description depuis le json
         }
         console.log(data) //Affichage dans la console du navigateur
+
+        /*const contact = {
+            lastName: ,
+            fistName: ,
+            adress: ,
+            city: ,
+            email: ,
+        }; */
     });
 

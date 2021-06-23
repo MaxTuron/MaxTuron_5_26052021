@@ -121,5 +121,6 @@ fetch("http://localhost:3000/api/teddies/"+searchParamsId) //Lien vers l'API
                 arrayPanier.push(teddy);
             }
             localStorage.setItem('panier', JSON.stringify(arrayPanier));
+            alert("L'objet à été ajouté au panier");
         }
     }
