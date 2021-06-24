@@ -1,6 +1,6 @@
 //Défini la ou le code html sera crée
 const section = document.querySelector('section');
-section.className="row";
+
 
 //Récupération du localStorage
 let objPanier = JSON.parse(localStorage.getItem('panier'));
@@ -121,7 +121,27 @@ if (objPanier.length===0) {
     confirmCommande.appendChild(txtBtnCommande);
     form.appendChild(confirmCommande);
     confirmCommande.onclick = function () {
+        let nom;
+        let prenom;
+        let adresse;
+        let ville;
+        let email;
 
+        nom = document.getElementById("lastName").value;
+        prenom = document.getElementById("firstName").value;
+        adresse = document.getElementById("adress").value;
+        ville = document.getElementById("city").value;
+        email = document.getElementById("email").value;
+
+        const contact = {
+            nom: nom,
+            prenom: prenom,
+            adresse: adresse,
+            ville: ville,
+            email: email,
+        };
+        console.log(contact);
+        alert(contact);
     };
 }
 

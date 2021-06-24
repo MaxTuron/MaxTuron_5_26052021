@@ -11,7 +11,7 @@ fetch("http://localhost:3000/api/teddies/")
 
             //Création d'une div
             const div = document.createElement('div');
-            div.className='cards';
+            div.className='col-sm';
             section.appendChild(div);
 
             //Création d'une image

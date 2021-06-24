@@ -16,7 +16,7 @@ fetch("http://localhost:3000/api/teddies/"+searchParamsId) //Lien vers l'API
         //Création de la div
         const div = document.createElement('div');
         //Ajout de la classe "cards"
-        div.className='col-sm-4';
+        div.className='col-md';
         //Défini l'élément parent "section"
         section.appendChild(div);
 
