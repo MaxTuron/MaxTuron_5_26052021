@@ -121,23 +121,18 @@ if (objPanier.length===0) {
     confirmCommande.appendChild(txtBtnCommande);
     form.appendChild(confirmCommande);
     confirmCommande.onclick = function () {
-        let nom;
-        let prenom;
-        let adresse;
-        let ville;
-        let email;
 
-        nom = document.getElementById("lastName").value;
-        prenom = document.getElementById("firstName").value;
-        adresse = document.getElementById("adress").value;
-        ville = document.getElementById("city").value;
-        email = document.getElementById("email").value;
+        let nom = document.getElementById("lastName").value;
+        let prenom = document.getElementById("firstName").value;
+        let adresse = document.getElementById("adress").value;
+        let ville = document.getElementById("city").value;
+        let email = document.getElementById("email").value;
 
         const contact = {
-            nom: nom,
-            prenom: prenom,
-            adresse: adresse,
-            ville: ville,
+            lastName: nom,
+            firstName: prenom,
+            adress: adresse,
+            city: ville,
             email: email,
         };
         console.log(contact);
