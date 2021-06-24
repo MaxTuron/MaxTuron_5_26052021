@@ -16,7 +16,7 @@ fetch("http://localhost:3000/api/teddies/"+searchParamsId) //Lien vers l'API
         //Création de la div
         const div = document.createElement('div');
         //Ajout de la classe "cards"
-        div.className='cards';
+        div.className='col-sm-4';
         //Défini l'élément parent "section"
         section.appendChild(div);
 
@@ -69,16 +69,17 @@ fetch("http://localhost:3000/api/teddies/"+searchParamsId) //Lien vers l'API
             color.appendChild(txtColor);
         }
 
-            //Création du bouton
-            const ajoutPanier = document.createElement('button');
-            //Texte liée au bouton
-            const txtButton = document.createTextNode("Ajouter au panier");
-            ajoutPanier.appendChild(txtButton);
-            div.appendChild(ajoutPanier);
-            //Appel de la fonction addLocalstorage au click sur le bouton
-            ajoutPanier.onclick = function() {
-                addLocalstorage(data);
-            };            
+        //Création du bouton
+        const ajoutPanier = document.createElement('button');
+        //Texte liée au bouton
+        const txtButton = document.createTextNode("Ajouter au panier");
+        ajoutPanier.className = "btn btn-primary";
+        ajoutPanier.appendChild(txtButton);
+        div.appendChild(ajoutPanier);
+        //Appel de la fonction addLocalstorage au click sur le bouton
+        ajoutPanier.onclick = function() {
+            addLocalstorage(data);
+        };
     });
 
     //Fonction d'ajout au local storage

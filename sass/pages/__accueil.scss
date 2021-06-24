@@ -7,14 +7,17 @@ header
 {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-between;
   width: 100%;
   color: white;
   background-color: #183392;
   i{
-    position: absolute;
-    top: 35px;
-    right: 50px;
+    padding-top:18px;
+    padding-right: 18px;
+  }
+  p{
+    padding-top:15px;
+    padding-left: 18px;
   }
   a{
     color: white;
@@ -27,6 +30,8 @@ header
   display: flex;
   flex-direction: row;
   margin: 8px;
+  width: 100%;
+
   .cards
   {
     display: flex;
@@ -35,7 +40,6 @@ header
     width: 20%;
     border-radius: 2px;
     margin: 0 8px 0 0;
-    border: 1px solid black;
 
     img{
       width: 100%;
@@ -47,6 +51,26 @@ header
   }
 }
 
+.col-sm{
+  background-color: #e8e5e5;
+  display: flex;
+  flex-direction: column;
+  margin: 4px;
+  border: black 2px solid;
+  border-radius: 3px;
+  img{
+    width: 60%;
+    height: 60%;
+  }
+  button{
+    margin: 8px 2px 8px 2px;
+    padding: 4px 8px 4px 8px;
+  }
+}
+
+.row{
+  margin: 0 !important;
+}
 
 footer
 {

@@ -1,14 +1,15 @@
 //Défini la ou le code html sera crée
 const section = document.querySelector('section');
+section.className="row";
 
 //Récupération du localStorage
 let objPanier = JSON.parse(localStorage.getItem('panier'));
 console.log('panier', objPanier);
 
 //Création d'une div
-const div = document.createElement('div');
-div.className='cards';
-section.appendChild(div);
+const divRow = document.createElement('div');
+divRow.className="row";
+section.appendChild(divRow);
 
 //Déclaration de deux variable permettant le calcul du prix d'un article et de la commande compléte
 let prixAdjust = 0;
@@ -17,38 +18,62 @@ let prixArticle = 0;
 //Si le panier est vide alors on affiche "Panier vide"
 if (objPanier.length===0) {
     const name = document.createElement('p');
-    div.appendChild(name);
+    divRow.appendChild(name);
     name.innerText = "Panier vide";
 
     //Sinon on créer l'affichage des objets du localstorage
 } else {
     for (let i = 0; i < objPanier.length; i++) {
 
+        //Création d'une div
+        const divCol = document.createElement('div');
+        divCol.className="col-sm";
+        divRow.appendChild(divCol);
+
         //Création du nom
         const name = document.createElement('p');
-        div.appendChild(name);
-        name.innerText = objPanier[i].name;
+        divCol.appendChild(name);
+        name.textContent  = "Produit : "+objPanier[i].name;
 
         //Création du prix
         const prix = document.createElement('p');
-        div.appendChild(prix);
-        prix.innerText = objPanier[i].price;
+        divCol.appendChild(prix);
+        prix.textContent ="Prix unitaire : "+objPanier[i].price+"€";
 
         //Création de la couleur
         const color = document.createElement('p');
-        div.appendChild(color);
-        color.innerText = objPanier[i].color;
+        divCol.appendChild(color);
+        color.textContent = "Couleur : "+objPanier[i].color;
+
 
         //Création du nombre
         const number = document.createElement('p');
-        div.appendChild(number);
-        number.innerText = objPanier[i].number;
+        divCol.appendChild(number);
+        number.textContent ="Quantité : "+objPanier[i].number;
+
+        //Création du bouton permettant de modifier la quantité d'un objet (-1)
+        const articleRemove = document.createElement('button');
+        const txtBtnRemove = document.createTextNode("-");
+        articleRemove.className = "btn btn-primary";
+        articleRemove.appendChild(txtBtnRemove);
+        number.appendChild(articleRemove);
+
+        if(objPanier[i].number > 0){
+            articleRemove.onclick = function () {
+                let objActu = objPanier[i];
+                articleMoins(objActu);
+            }
+        }else{
+            let objActu = objPanier[i];
+            articleSuppr(objActu);
+        };
 
         //Création du bouton permettant de modifier la quantité d'un objet (+1)
         const articleAdd = document.createElement('button');
         const txtBtnAdd = document.createTextNode("+");
+        articleAdd.className = "btn btn-primary";
         articleAdd.appendChild(txtBtnAdd);
-        div.appendChild(articleAdd);
+        number.appendChild(articleAdd);
 
         articleAdd.onclick = function () {
             let objActu = objPanier[i];
@@ -56,28 +81,13 @@ if (objPanier.length===0) {
         };
 
 
-        //Création du bouton permettant de modifier la quantité d'un objet (-1)
-        const articleRemove = document.createElement('button');
-        const txtBtnRemove = document.createTextNode("-");
-        articleRemove.appendChild(txtBtnRemove);
-        div.appendChild(articleRemove);
-
-        if(objPanier[i].number > 0){
-        articleRemove.onclick = function () {
-            let objActu = objPanier[i];
-            articleMoins(objActu);
-        }
-        }else{
-            let objActu = objPanier[i];
-                articleSuppr(objActu);
-        };
-
 
         //Création du bouton permettant de supprimer un objet
         const supprPanier = document.createElement('button');
         const txtBtnSuppr = document.createTextNode("Supprimer du panier");
+        supprPanier.className = "btn btn-primary";
         supprPanier.appendChild(txtBtnSuppr);
-        div.appendChild(supprPanier);
+        divCol.appendChild(supprPanier);
         supprPanier.onclick = function () {
             let objActu = objPanier[i];
             articleSuppr(objActu);
@@ -86,7 +96,7 @@ if (objPanier.length===0) {
         //Calcul du prix d'un article (prix unitaire * nombre d'objet)
         prixArticle = (objPanier[i].price * objPanier[i].number);
         const affichePrixArticle = document.createElement('p');
-        div.appendChild(affichePrixArticle);
+        divCol.appendChild(affichePrixArticle);
         const afficheTotalArticle = document.createTextNode('Le prix total de cet article est de : '+prixArticle);
         affichePrixArticle.appendChild(afficheTotalArticle);
 
@@ -107,6 +117,7 @@ if (objPanier.length===0) {
     //Création d'un bouton de confirmation de commande
     const confirmCommande = document.createElement('button');
     const txtBtnCommande = document.createTextNode("Confirmer la commande");
+    confirmCommande.className = "btn btn-primary";
     confirmCommande.appendChild(txtBtnCommande);
     form.appendChild(confirmCommande);
     confirmCommande.onclick = function () {
