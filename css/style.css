@@ -28,6 +28,7 @@ header a {
   background-color: #e8e5e5;
   display: flex;
   flex-direction: column;
+  width: 25%;
   margin: 4px !important;
   border: black 2px solid;
   border-radius: 3px;
@@ -55,8 +56,16 @@ header a {
   padding: 4px 8px 4px 8px;
 }
 
-.row {
-  margin: 0 !important;
+.d-flex {
+  flex-wrap: wrap;
+}
+
+.p-2 {
+  background-color: #e8e5e5;
+  margin: 4px !important;
+  border: black 2px solid;
+  border-radius: 3px;
+  width: 24%;
 }
 
 footer {

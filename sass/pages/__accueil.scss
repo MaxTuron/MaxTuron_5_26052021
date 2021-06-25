@@ -25,11 +25,11 @@ header
   }
 }
 
-
 .col-sm{
   background-color: #e8e5e5;
   display: flex;
   flex-direction: column;
+  width: 25%;
   margin: 4px !important;
   border: black 2px solid;
   border-radius: 3px;
@@ -43,6 +43,7 @@ header
   }
 }
 
+
 .col-md{
   background-color: #e8e5e5;
   display: flex;
@@ -51,18 +52,25 @@ header
   border: black 2px solid;
   border-radius: 3px;
   width: 33%;
-  img{
 
-  }
   button{
     margin: 8px 2px 8px 2px;
     padding: 4px 8px 4px 8px;
   }
 }
 
-.row{
-  margin: 0 !important;
+.d-flex{
+  flex-wrap: wrap;
 }
+
+.p-2{
+  background-color: #e8e5e5;
+  margin: 4px !important;
+  border: black 2px solid;
+  border-radius: 3px;
+  width: 24%;
+}
+
 
 footer
 {

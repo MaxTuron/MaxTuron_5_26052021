@@ -8,7 +8,7 @@ console.log('panier', objPanier);
 
 //Création d'une div
 const divRow = document.createElement('div');
-divRow.className="row";
+divRow.className="d-flex flex-row bd-highlight mb-3";
 section.appendChild(divRow);
 
 //Déclaration de deux variable permettant le calcul du prix d'un article et de la commande compléte
@@ -27,7 +27,7 @@ if (objPanier.length===0) {
 
         //Création d'une div
         const divCol = document.createElement('div');
-        divCol.className="col-sm";
+        divCol.className="p-2 bd-highlight";
         divRow.appendChild(divCol);
 
         //Création du nom
@@ -144,7 +144,7 @@ if (objPanier.length===0) {
 function articleMoins (objActu){
     objPanier.forEach((article) => {
         //Si le nom et la couleur de l'article corespond à l'objet créer alors
-        if (article.name === objActu.name && article.colors === objActu.colors) {
+        if (article.name === objActu.name&& article.color === objActu.color) {
             //On retire -1 au nombre d'objet
             article.number--;
         }
@@ -159,14 +159,15 @@ function articlePlus (objActu){
     //Parcours les objets du tableau objPanier
     objPanier.forEach((article) => {
         //Si le nom et la couleur de l'article corespond à l'objet créer alors
-        if (article.name === objActu.name && article.colors === objActu.colors) {
+        if (article.name === objActu.name &&article.color === objActu.color) {
             //On ajoute +1 au nombre d'objet
             article.number++;
-            //Actualistation de la page
+
         }
     });
     //Renvoie de l'article modifié dans le localstorage
     localStorage.setItem('panier', JSON.stringify(objPanier));
+    //Actualistation de la page
     history.go(0);
 }
 
@@ -175,7 +176,7 @@ function articleSuppr (objActu) {
     let panier = JSON.parse(localStorage.getItem('panier'));
 
     panier.forEach((article,index)=> {
-        if (objActu.name === article.name && objActu.colors === article.colors) {
+        if (objActu.name === article.name &&objActu.color === article.color) {
             panier.splice(index,1);
         }
     });
