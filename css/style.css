@@ -9,7 +9,7 @@ header {
   justify-content: space-between;
   width: 100%;
   color: white;
-  background-color: #183392;
+  background-color: #0d6efd;
 }
 header i {
   padding-top: 18px;
@@ -20,8 +20,28 @@ header p {
   padding-left: 18px;
 }
 header a {
-  color: white;
+  color: #ffffff;
   text-decoration: none;
+}
+header a:hover {
+  color: #a8a5a5;
+}
+
+section h2 {
+  display: flex;
+  justify-content: center;
+}
+section a {
+  text-decoration: none;
+  color: black;
+}
+
+.produit .col-md {
+  display: block;
+  margin: auto !important;
+}
+.produit img {
+  width: 100%;
 }
 
 .row {
@@ -35,12 +55,22 @@ header a {
   flex-direction: column;
   width: 25%;
   margin: 4px !important;
-  border: black 2px solid;
+  border: transparent;
   border-radius: 3px;
+  padding-left: 5px !important;
+  padding-right: 5px !important;
 }
 .col-sm img {
   width: 100%;
   height: 100%;
+}
+.col-sm a {
+  display: flex;
+  justify-content: center;
+}
+.col-sm p {
+  display: flex;
+  justify-content: center;
 }
 .col-sm button {
   margin: 8px 2px 8px 2px;
@@ -66,11 +96,15 @@ header a {
 }
 
 .p-2 {
-  background-color: #e8e5e5;
+  background-color: #ffffff;
   margin: 4px !important;
-  border: black 2px solid;
-  border-radius: 3px;
+  border: #0042ff 2px solid;
+  border-radius: 6px;
   width: 24%;
+}
+.p-2 p button {
+  margin-right: 2px;
+  margin-left: 2px;
 }
 
 .formulaire {
@@ -100,7 +134,7 @@ header a {
 footer {
   width: 100%;
   color: white;
-  background-color: #183392;
+  background-color: #0d6efd;
 }
 footer a {
   text-decoration: none;

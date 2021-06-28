@@ -10,7 +10,7 @@ header
   justify-content: space-between;
   width: 100%;
   color: white;
-  background-color: #183392;
+  background-color: #0d6efd;
   i{
     padding-top:18px;
     padding-right: 18px;
@@ -20,10 +20,35 @@ header
     padding-left: 18px;
   }
   a{
-    color: white;
+    color: #ffffff;
     text-decoration: none;
   }
+  a:hover{
+    color: #a8a5a5;
+  }
 }
+
+section{
+  h2{
+    display: flex;
+    justify-content: center;
+  }
+  a{
+    text-decoration: none;
+    color: black;
+  }
+}
+
+.produit{
+  .col-md{
+    display: block;
+    margin: auto !important;
+  }
+    img{
+      width: 100%;
+    }
+}
+
 .row{
   width: 100%;
   --bs-gutter-x: 0 !important;
@@ -34,11 +59,21 @@ header
   flex-direction: column;
   width: 25%;
   margin: 4px !important;
-  border: black 2px solid;
+  border: transparent;
   border-radius: 3px;
+  padding-left: 5px !important;
+  padding-right: 5px !important;
   img{
     width: 100%;
     height: 100%;
+  }
+  a{
+    display: flex;
+    justify-content: center;
+  }
+  p{
+    display: flex;
+    justify-content: center;
   }
   button{
     margin: 8px 2px 8px 2px;
@@ -67,11 +102,17 @@ header
 }
 
 .p-2{
-  background-color: #e8e5e5;
+  background-color: #ffffff;
   margin: 4px !important;
-  border: black 2px solid;
-  border-radius: 3px;
+  border: #0042ff 2px solid;
+  border-radius: 6px;
   width: 24%;
+  p{
+    button{
+      margin-right: 2px;
+      margin-left: 2px;
+    }
+  }
 }
 
 .formulaire{
@@ -103,7 +144,7 @@ footer
 {
   width: 100%;
   color: white;
-  background-color: #183392;
+  background-color: #0d6efd;
   a{
     text-decoration: none;
     color: white;
