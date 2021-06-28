@@ -52,31 +52,36 @@ if (objPanier.length===0) {
         number.textContent ="Quantité : "+objPanier[i].number;
 
         //Création du bouton permettant de modifier la quantité d'un objet (-1)
-        const articleRemove = document.createElement('button');
-        const txtBtnRemove = document.createTextNode("-");
-        articleRemove.className = "btn btn-primary";
-        articleRemove.appendChild(txtBtnRemove);
-        number.appendChild(articleRemove);
+        const articleLess = document.createElement('button');
+        const txtBtnLess = document.createTextNode("-");
+        articleLess.className = "btn btn-primary";
+        articleLess.appendChild(txtBtnLess);
+        number.appendChild(articleLess);
 
+        //Si la quantité d'un article est > 0 on fait -1
         if(objPanier[i].number > 0){
-            articleRemove.onclick = function () {
+            articleLess.onclick = function () {
                 let objActu = objPanier[i];
+                //Appel de la fonction articleMoins
                 articleMoins(objActu);
             }
+            //Sinon on supprime l'article
         }else{
             let objActu = objPanier[i];
+            //Appel de la fonction articleSuppr
             articleSuppr(objActu);
         };
 
         //Création du bouton permettant de modifier la quantité d'un objet (+1)
-        const articleAdd = document.createElement('button');
-        const txtBtnAdd = document.createTextNode("+");
-        articleAdd.className = "btn btn-primary";
-        articleAdd.appendChild(txtBtnAdd);
-        number.appendChild(articleAdd);
+        const articleMore = document.createElement('button');
+        const txtBtnMore = document.createTextNode("+");
+        articleMore.className = "btn btn-primary";
+        articleMore.appendChild(txtBtnMore);
+        number.appendChild(articleMore);
 
-        articleAdd.onclick = function () {
+        articleMore.onclick = function () {
             let objActu = objPanier[i];
+            //Appel de la fonction articlePlus
             articlePlus(objActu);
         };
 
@@ -90,6 +95,7 @@ if (objPanier.length===0) {
         divCol.appendChild(supprPanier);
         supprPanier.onclick = function () {
             let objActu = objPanier[i];
+            //Appel de la fonction articleSuppr
             articleSuppr(objActu);
         };
 
@@ -105,7 +111,8 @@ if (objPanier.length===0) {
 
     }
 
-    const form = document.querySelector('form'); //Défini la ou le code html sera crée
+    //Défini la ou le code html sera crée
+    const form = document.querySelector('form');
 
     //Récupétation du prix total de la commande
     prixTotal = prixAdjust;
@@ -122,6 +129,7 @@ if (objPanier.length===0) {
     form.appendChild(confirmCommande);
     confirmCommande.onclick = function () {
 
+        //Récuperation des informations données dans le formulaire
         let nom = document.getElementById("lastName").value;
         let prenom = document.getElementById("firstName").value;
         let adresse = document.getElementById("adress").value;
@@ -129,6 +137,7 @@ if (objPanier.length===0) {
         let email = document.getElementById("email").value;
         let prixFinal = prixTotal;
 
+        //Création d'un objet contact
         const contact = {
             lastName: nom,
             firstName: prenom,

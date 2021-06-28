@@ -15,12 +15,5 @@ fetch("http://localhost:3000/api/teddies/order") //Lien vers l'API
         }
         console.log(data) //Affichage dans la console du navigateur
 
-        /*const contact = {
-            lastName: ,
-            fistName: ,
-            adress: ,
-            city: ,
-            email: ,
-        }; */
     });
 
