@@ -55,14 +55,13 @@ section a {
   flex-direction: column;
   width: 25%;
   margin: 4px !important;
-  border: transparent;
-  border-radius: 3px;
-  padding-left: 5px !important;
-  padding-right: 5px !important;
+  border-radius: 10px 10px 0 0;
 }
 .col-sm img {
   width: 100%;
   height: 100%;
+  object-fit: cover;
+  border-radius: 10px 10px 0 0;
 }
 .col-sm a {
   display: flex;
@@ -82,9 +81,14 @@ section a {
   display: flex;
   flex-direction: column;
   margin: 4px !important;
-  border: black 2px solid;
-  border-radius: 3px;
+  border-radius: 10px 10px 0 0;
   width: 33%;
+}
+.col-md img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px 10px 0 0;
 }
 .col-md button {
   margin: 8px 2px 8px 2px;
