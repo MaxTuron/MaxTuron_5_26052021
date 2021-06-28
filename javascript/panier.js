@@ -127,6 +127,7 @@ if (objPanier.length===0) {
         let adresse = document.getElementById("adress").value;
         let ville = document.getElementById("city").value;
         let email = document.getElementById("email").value;
+        let prixFinal = prixTotal;
 
         const contact = {
             lastName: nom,
@@ -134,6 +135,7 @@ if (objPanier.length===0) {
             adress: adresse,
             city: ville,
             email: email,
+            prixFinal: prixFinal,
         };
         console.log(contact);
         alert(contact);

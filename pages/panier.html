@@ -25,24 +25,24 @@
 </section>
 
 
-<section>
+<section class="formulaire">
   <h1>Formulaire de commande</h1>
   <form class="row">
     <div class="col-md-6">
       <label for='lastName' class="form-label">Nom</label>
-      <input type='text' id='lastName' class="form-control">
+      <input type='text' id='lastName' class="form-control" pattern="[a-zA-ZÀ-ÿ]">
     </div>
     <div class="col-md-6">
       <label for='firstName' class="form-label">Prenom</label>
-      <input type='text' id='firstName' class="form-control">
+      <input type='text' id='firstName' class="form-control" pattern="[a-zA-ZÀ-ÿ]">
     </div>
-    <div class="col-md-12">
+    <div class="col-md-6">
       <label for='adress' class="form-label">Adresse</label>
-      <input type='text' id='adress' class="form-control">
+      <input type='text' id='adress' class="form-control" >
     </div>
     <div class="col-md-6">
       <label for='city' class="form-label">Ville</label>
-      <input type='text' id='city' class="form-control">
+      <input type='text' id='city' class="form-control" pattern="[a-zA-ZÀ-ÿ]">
     </div>
     <div class="col-md-6">
       <label for='email' class="form-label">Email</label>
