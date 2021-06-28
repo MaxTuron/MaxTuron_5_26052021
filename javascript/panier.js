@@ -70,7 +70,7 @@ if (objPanier.length===0) {
             let objActu = objPanier[i];
             //Appel de la fonction articleSuppr
             articleSuppr(objActu);
-        };
+        }
 
         //Création du bouton permettant de modifier la quantité d'un objet (+1)
         const articleMore = document.createElement('button');

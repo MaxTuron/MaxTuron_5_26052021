@@ -110,7 +110,7 @@ fetch("http://localhost:3000/api/teddies/"+searchParamsId) //Lien vers l'API
             localStorage.setItem('panier', JSON.stringify([teddy]));
             //Sinon si un objet est identique mais avec un nombre différent
         }else{
-            arrayPanier = JSON.parse(panier);
+            let arrayPanier = JSON.parse(panier);
             let valid = false;
             arrayPanier.forEach((article)=>{
                 if(article.name===teddy.name && article.color===teddy.color){
