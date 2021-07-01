@@ -1,82 +1,45 @@
-const section = document.querySelector('section'); //Défini la ou le code html sera crée
+let Ours = document.querySelector('#Ours'); //Défini la ou le code html sera crée
 
 //on récupère les paramètres de l'url
-const searchParams = window.location.search;
+let searchParams = window.location.search;
 
 //on enlève le '?' pour n'avoir QUE les paramètres
-const searchParamsOnly = searchParams.substring(1,window.location.search.length);
+let searchParamsOnly = searchParams.substring(1,window.location.search.length);
 
 //on enlève le 'id=' pour n'avoir que l'id utilisable
-const searchParamsId = searchParamsOnly.substring(3,window.location.search.length);
+let searchParamsId = searchParamsOnly.substring(3,window.location.search.length);
 
 fetch("http://localhost:3000/api/teddies/"+searchParamsId) //Lien vers l'API
     .then(res => res.json()) //Défini le type de fichier attendu, ici un json
     .then(data => {
 
-        //Création de la div
-        const div = document.createElement('div');
-        //Ajout de la classe "cards"
-        div.className='col-md';
-        //Défini l'élément parent "section"
-        section.appendChild(div);
+        //Création des différents élements
+        let img = document.querySelector('#imgProduct'),
+            name = document.querySelector('#nameProduct'),
+            price = document.querySelector('#priceProduct'),
+            description = document.querySelector('#descriptionProduct'),
+            colorTeddys = document.querySelector('#colorTeddys'),
+            ajoutPanier = document.querySelector('#ajoutPanier');
 
-        //Création d'une image
-        const img = document.createElement('img');
-        div.appendChild(img);
-        //Récupération du lien d'une image depuis le fichier json
+        //On attribu les données à chaque élement
         img.src = data.imageUrl;
-
-        //Création d'un titre h1
-        const name = document.createElement('h1');
-        div.appendChild(name);
         name.innerText = data.name;
-
-        //Création d'un paragraphe prix
-        const price = document.createElement('p');
-        div.appendChild(price);
-        price.innerText = data.price;
-
-        //Création d'un paragraphe description
-        const description = document.createElement('p');
-        div.appendChild(description);
+        price.innerText =(data.price / 100).toLocaleString("fr") + " €";
         description.innerText = data.description;
 
-        //Création d'un selecteur pour les différentes couleurs
-        const colorTeddys = document.createElement('select');
-        colorTeddys.name='colors';
-        colorTeddys.id='colorTeddys';
-        div.appendChild(colorTeddys);
-
-        //Création d'un input permettant à l'utilistaeur de choisir le nombre de produit
-        const number = document.createElement('input');
-        number.type='number';
-        number.id="quantite";
-        //Valeur minimale
-        number.min=0;
-        //Valeur maximale
-        number.max=10;
-        //Valeur de base
-        number.value=1;
-        div.appendChild(number);
 
         //Boucle permettant d'afficher le nom des couleurs liée à un ours
         for (let i=0; i<data.colors.length; i++) {
             //Création de la balise option
-            const color = document.createElement('option');
+            let color = document.createElement('option');
             color.value='colors'+[i];
             colorTeddys.appendChild(color);
-            const txtColor = document.createTextNode(data.colors[i]);
+            let txtColor = document.createTextNode(data.colors[i]);
             color.appendChild(txtColor);
         }
 
-        //Création du bouton
-        const ajoutPanier = document.createElement('button');
-        //Texte liée au bouton
-        const txtButton = document.createTextNode("Ajouter au panier");
-        ajoutPanier.className = "btn btn-primary";
+        let txtButton = document.createTextNode("Ajouter au panier");
         ajoutPanier.appendChild(txtButton);
-        div.appendChild(ajoutPanier);
-        //Appel de la fonction addLocalstorage au click sur le bouton
         ajoutPanier.onclick = function() {
             addLocalstorage(data);
         };
@@ -98,6 +61,7 @@ fetch("http://localhost:3000/api/teddies/"+searchParamsId) //Lien vers l'API
             name: data.name,
             id: data._id,
             price: data.price,
+            img: data.imageUrl,
             color: choosenColor,
             number: choosenNumber,
         };
