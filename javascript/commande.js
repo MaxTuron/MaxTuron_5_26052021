@@ -1,26 +1,25 @@
 let objPanier = JSON.parse(localStorage.getItem("panier"));
-let productsID = [];
-console.log(objPanier);
 
 panier();
 let orderId = localStorage.getItem("orderId");
 let afficheOrderId = document.querySelector("#orderID");
 afficheOrderId.textContent=orderId;
+//Vide le localstorage apres une commande
+localStorage.removeItem("panier");
+localStorage.removeItem("orderId");
 
-/* localStorage.removeItem("panier"); */
-/* localStorage.removeItem("orderId"); */
 
 //Parcours le panier et affiche les objets + le total de la commande
 function panier() {
     for (let i = 0; i < objPanier.length; i++) {
         afficheOurs(i);
     }
+    //affiche le prix total de la commande
     prixTotal();
 }
 
-//
+//Affiche un élement du panier
 function afficheOurs(i) {
-    productsID.push(objPanier[i]._id);
     // Création des éléments
     let commande = document.querySelector("#panier"),
         objCommande = document.createElement("div"),
@@ -40,11 +39,14 @@ function afficheOurs(i) {
 
     // Placement des éléments
     commande.appendChild(objCommande);
-    objCommande.appendChild(price);
     objCommande.appendChild(name);
     objCommande.appendChild(quantite);
+    objCommande.appendChild(price);
     objCommande.appendChild(choosenColor);
     objCommande.appendChild(image);
+
+    //Ajout de classes CSS
+    objCommande.className="p-2 bd-highlight objCommande";
 
 }
 

@@ -1,14 +1,5 @@
-//Défini la ou le code html sera crée
-let section = document.querySelector('section');
-
 //Récupération du localStorage
 let objPanier = JSON.parse(localStorage.getItem('panier'));
-console.log('panier', objPanier);
-
-//Création d'une div
-let divRow = document.createElement('div');
-divRow.className="d-flex flex-row bd-highlight mb-3";
-section.appendChild(divRow);
 
 //Déclaration de deux variable permettant le calcul du prix d'un article et de la commande compléte
 let prixAdjust = 0,
@@ -16,16 +7,16 @@ let prixAdjust = 0,
 
 //Si le panier est vide alors on affiche "Panier vide"
 if (objPanier.length===0) {
-    let name = document.createElement('p');
-    divRow.appendChild(name);
-    name.innerText = "Panier vide";
+    let panierVide = document.querySelector('#panierVide');
+        panierVide.innerText = "Panier vide";
 
     //Sinon on créer l'affichage des objets du localstorage
 } else {
     for (let i = 0; i < objPanier.length; i++) {
 
         //Création des différents élements
-        let divCol = document.createElement('div'),
+        let divRow = document.querySelector('#divRow'),
+            divCol = document.createElement('div'),
             name = document.createElement('p'),
             prix = document.createElement('p'),
             color = document.createElement('p'),
@@ -74,13 +65,11 @@ if (objPanier.length===0) {
         articleMore.className = "btn btn-primary";
         articleMore.appendChild(txtBtnMore);
         number.appendChild(articleMore);
-
         articleMore.onclick = function () {
             let objActu = objPanier[i];
             //Appel de la fonction articlePlus
             articlePlus(objActu);
         };
-
 
 
         //Création du bouton permettant de supprimer un objet
@@ -98,8 +87,8 @@ if (objPanier.length===0) {
         //Calcul du prix d'un article (prix unitaire * nombre d'objet)
         prixArticle = (objPanier[i].price * objPanier[i].number);
         let affichePrixArticle = document.createElement('p');
-        divCol.appendChild(affichePrixArticle);
         let afficheTotalArticle = document.createTextNode('Le prix total de cet article est de : '+(prixArticle/100).toLocaleString("fr") + " €");
+        divCol.appendChild(affichePrixArticle);
         affichePrixArticle.appendChild(afficheTotalArticle);
         //A chaque tout de boucle, le prix d'un article s'ajoute au précédant
         prixAdjust = prixAdjust + prixArticle;
@@ -116,15 +105,11 @@ if (objPanier.length===0) {
     let afficheTotalCommande = document.createTextNode('Le prix total de la commande est de : '+(prixTotal/100).toLocaleString("fr") + " €");
     totalCommande.appendChild(afficheTotalCommande);
 
-    //Création d'un bouton de confirmation de commande
-    let confirmCommande = document.createElement('button');
-    let txtBtnCommande = document.createTextNode("Confirmer la commande");
-    confirmCommande.className = "btn btn-primary";
-    confirmCommande.appendChild(txtBtnCommande);
-    form.appendChild(confirmCommande);
-    confirmCommande.onclick = function () {
+    let btnConfirmCommande = document.querySelector("#confirmCommande");
+    btnConfirmCommande.addEventListener("click", confirmCommande);
 
 
+    function confirmCommande (){
         //Récuperation des informations données dans le formulaire
         let nom = document.getElementById("lastName").value,
             prenom = document.getElementById("firstName").value,
@@ -132,39 +117,45 @@ if (objPanier.length===0) {
             ville = document.getElementById("city").value,
             email = document.getElementById("email").value;
 
-        //Création d'un objet contact
-        let contact = {
-            firstName: prenom,
-            lastName: nom,
-            address: adresse,
-            city: ville,
-            email: email,
-        };
+        if (nom === "" || prenom === "" ||adresse === "" ||ville === "" ||email === "") {
+            alert("Champ non renseigné");
+            history.go(0);
+        } else {
 
-        let productIds = [];
-        let panier = JSON.parse(localStorage.getItem('panier'));
-        panier.forEach((article) => {
-            productIds.push(article.id);
-        });
+            //Création d'un objet contact
+            let contact = {
+                firstName: prenom,
+                lastName: nom,
+                address: adresse,
+                city: ville,
+                email: email,
+            };
 
-        fetch("http://localhost:3000/api/teddies/order",
-            {
-                method: 'POST',
-                body: JSON.stringify({
-                    contact: contact,
-                    products: productIds,
-                }),
-                headers: {
-                    'Content-type': 'application/json; charset=UTF-8'
-                }
-            }).then(res => res.json())
-            .then(data => {
-                localStorage.setItem("orderId", data.orderId);
-                window.location.href = "../pages/commande.html";
-    })
-    .catch(error => alert("Un des champ du formulaire n'est pas correct !"));
-        alert(contact);
-    };
+            let productIds = [];
+            let panier = JSON.parse(localStorage.getItem('panier'));
+            panier.forEach((article) => {
+                productIds.push(article.id);
+            });
+
+            fetch("http://localhost:3000/api/teddies/order",
+                {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        contact: contact,
+                        products: productIds,
+                    }),
+                    headers: {
+                        'Content-type': 'application/json; charset=UTF-8'
+                    }
+                }).then(res => res.json())
+                .then(data => {
+                    localStorage.setItem("orderId", data.orderId);
+                    window.location.href = "../pages/commande.html";
+                })
+
+            alert("Merci pour votre commande !");
+        }
+    }
 }
 
 //Fonction qui retire 1 au nombre d'objet

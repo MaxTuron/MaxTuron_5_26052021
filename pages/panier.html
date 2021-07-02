@@ -26,6 +26,9 @@
     <!--Section permettant de définir l'endroit où sera écrit le code HTML depuis le fichier panier.js-->
     <section>
       <h2>Panier</h2>
+      <p id="panierVide"></p>
+      <div id="divRow" class="d-flex flex-row bd-highlight mb-3">
+      </div>
     </section>
 
     <!--Déclaration du formulaire-->
@@ -34,11 +37,11 @@
       <form class="row">
         <div class="col-md-6">
           <label for='lastName' class="form-label">Nom</label>
-          <input type='text' id='lastName' class="form-control" pattern="[a-z A-Z À-ÿ]{2,50}">
+          <input type='text' id='lastName' class="form-control" >
         </div>
         <div class="col-md-6">
           <label for='firstName' class="form-label">Prenom</label>
-          <input type='text' id='firstName' class="form-control" pattern="[a-z A-Z À-ÿ]{2,50}">
+          <input type='text' id='firstName' class="form-control">
         </div>
         <div class="col-md-6">
           <label for='adress' class="form-label">Adresse</label>
@@ -46,13 +49,14 @@
         </div>
         <div class="col-md-6">
           <label for='city' class="form-label">Ville</label>
-          <input type='text' id='city' class="form-control" pattern="[a-z A-Z À-ÿ]{2,50}">
+          <input type='text' id='city' class="form-control">
         </div>
         <div class="col-md-6">
           <label for='email' class="form-label">Email</label>
           <input type='email' id='email' class="form-control">
         </div>
       </form>
+      <a id="confirmCommande" class="btn btn-primary" role="button" type="submit">Confirmer la commande</a>
     </section>
 
     <div id="OrderID"></div>
