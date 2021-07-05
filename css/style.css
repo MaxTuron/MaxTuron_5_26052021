@@ -38,7 +38,7 @@ section a {
 
 .produit .col-md {
   display: block;
-  margin: auto !important;
+  margin: 4px auto 4px auto !important;
 }
 .produit img {
   width: 100%;
