@@ -1,9 +1,11 @@
 let objPanier = JSON.parse(localStorage.getItem("panier"));
 
 panier();
+
 let orderId = localStorage.getItem("orderId");
 let afficheOrderId = document.querySelector("#orderID");
 afficheOrderId.textContent=orderId;
+
 //Vide le localstorage apres une commande
 localStorage.removeItem("panier");
 localStorage.removeItem("orderId");
