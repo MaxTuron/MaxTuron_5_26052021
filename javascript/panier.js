@@ -105,6 +105,7 @@ if (objPanier.length===0) {
     let afficheTotalCommande = document.createTextNode('Le prix total de la commande est de : '+(prixTotal/100).toLocaleString("fr") + " €");
     totalCommande.appendChild(afficheTotalCommande);
 
+    //Appel de la fonction confirmCommande
     let btnConfirmCommande = document.querySelector("#confirmCommande");
     btnConfirmCommande.addEventListener("click", confirmCommande);
 
@@ -116,11 +117,6 @@ if (objPanier.length===0) {
             adresse = document.getElementById("adress").value,
             ville = document.getElementById("city").value,
             email = document.getElementById("email").value;
-
-        if (nom === "" || prenom === "" ||adresse === "" ||ville === "" ||email === "") {
-            alert("Champ non renseigné");
-            history.go(0);
-        } else {
 
             //Création d'un objet contact
             let contact = {
@@ -152,10 +148,7 @@ if (objPanier.length===0) {
                     localStorage.setItem("orderId", data.orderId);
                     window.location.href = "../pages/commande.html";
                 })
-
-            alert("Merci pour votre commande !");
         }
-    }
 }
 
 //Fonction qui retire 1 au nombre d'objet
