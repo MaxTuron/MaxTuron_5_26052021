@@ -23,6 +23,7 @@ fetch("http://localhost:3000/api/teddies/"+searchParamsId) //Lien vers l'API
 
         //On attribu les données à chaque élement
         img.src = data.imageUrl;
+        img.alt = data.name;
         name.innerText = data.name;
         price.innerText =(data.price / 100).toLocaleString("fr") + " €";
         description.innerText = data.description;
