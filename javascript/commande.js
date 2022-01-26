@@ -38,7 +38,6 @@ function afficheOurs(i) {
     choosenColor.textContent=objPanier[i].color;
     price.textContent=((objPanier[i].price * objPanier[i].number) / 100).toLocaleString("fr") + " €";
 
-
     // Placement des éléments
     commande.appendChild(objCommande);
     objCommande.appendChild(name);

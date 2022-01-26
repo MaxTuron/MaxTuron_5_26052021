@@ -72,7 +72,6 @@ fetch("http://localhost:3000/api/teddies/"+searchParamsId) //Lien vers l'API
         //Si le localstorga est vide alors ajouter l'objet
         if (!panier) {
             localStorage.setItem('panier', JSON.stringify([teddy]));
-            localStorage.setItem('panier', JSON.stringify([teddy]));
             //Sinon si un objet est identique mais avec un nombre différent
         }else{
             let arrayPanier = JSON.parse(panier);
